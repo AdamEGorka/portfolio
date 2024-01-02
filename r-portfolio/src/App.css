@@ -13,10 +13,10 @@
 }
 
 .nav-bar {
-  width: 100%;
+  width: 80%;
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 50px 0;
 }
 
 .nav-bar button {
@@ -44,6 +44,7 @@
 }
 
 .content {
-  padding: 20px;
+  padding: -20px 10px;
   text-align: center;
+  padding-bottom: 5px; /* Adjusted bottom padding */
 }

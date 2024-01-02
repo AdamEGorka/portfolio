@@ -1,37 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import TypedText from './TypedText';
 import React, { useState, useEffect, useRef  } from 'react';
+import { TypeAnimation } from 'react-type-animation';
 
 const text = 'Option bruh bruh  content goes here';
+const words = ['React', 'Typewriter', 'Effect'];
 
 const App = () => {
   const [selectedOption, setSelectedOption] = useState('option1');
-  const [contentText, setContentText] = useState('');
-  const isEffectRunning = useRef(false);
-
-
-  useEffect(() => {
-    let intervalId;
-
-    if (selectedOption === 'option1') {
-      let index = 0;
-      intervalId = setInterval(() => {
-        if (index < text.length - 1) {
-          setContentText((prevContent) => prevContent + text[index]);
-          index++;
-          console.log(index);
-        } else {
-          clearInterval(intervalId);
-        }
-      }, 50);
-    } else {
-      setContentText('');
-    }
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [selectedOption]);
+  const [showCursor, setShowCursor] = useState(true);
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
@@ -58,6 +36,11 @@ const App = () => {
   const getRandomColor = () => {
     // Generate a random hex color code
     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  };
+
+  const handleSequenceEnd = () => {
+    // This callback is called when the entire sequence has been typed
+    setShowCursor(false); // Hide the cursor
   };
 
   return (
@@ -90,18 +73,35 @@ const App = () => {
         </button>
       </div>
 
-      {/* Top Element */}
-      <div className="top-element">
-        <h1>Your Name</h1>
+      {/* <div className="top-element"> */}
+        {/* <h1>Adam Gorka</h1> */}
         {/* Add any other content for the top element */}
-      </div>
+      {/* </div> */}
 
       {/* Content */}
       <div className="content">
         {selectedOption === 'option1' && (
           <>
-            <p>{colorizeText(contentText)}</p>
-            <img src={logo} alt="GIF" />
+            {/* <p>{text}</p> */}
+            {/* <TypedText delay={110}>Your typed text goes here</TypedText> */}
+            <TypeAnimation
+              sequence={[
+                "Hi, I'm Adam Gorka",
+                10000, // wait 1s before replacing "Mice" with "Hamsters"
+                "Hi, I'm a Junior studying CS at Penn",
+                10000,
+                "Hi, I'm excited to meet you!",
+                10000,
+                "Hi, I'm excited about all things CS!"
+              ]}
+              wrapper="span"
+              speed={50}
+              infinite={true}
+              style={{ fontSize: '4em', display: 'inline-block', color: '#614A42', font: 'lato', fontWeight: 'bold'}}
+              cursor={showCursor} // Only show the cursor when showCursor is true
+              onSequenceEnd={handleSequenceEnd} // Callback when the sequence ends
+            />
+            
           </>
         )}
         {selectedOption === 'option2' && <p>Option 2 content goes here</p>}
