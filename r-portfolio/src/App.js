@@ -1,11 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
-import TypedText from './TypedText';
-import React, { useState, useEffect, useRef  } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { TypeAnimation } from 'react-type-animation';
+import FadeIn from 'react-fade-in';
 
-const text = 'Option bruh bruh  content goes here';
-const words = ['React', 'Typewriter', 'Effect'];
+// tabs
+import About from './About';
+
+// social media icons
+import linkedinIcon from './linkedin.png';
+import githubIcon from './github.png';
+import gmailIcon from './email.png';
 
 const App = () => {
   const [selectedOption, setSelectedOption] = useState('option1');
@@ -15,33 +19,11 @@ const App = () => {
     setSelectedOption(option);
   };
 
-  const colorizeText = (text) => {
-    const normColor = '#AAC0AA'; // Normal color
-    const colors = text.split('').map(() => normColor); // Initialize all colors to normal color
-    const newestIndex = text.length - 1; // Index of the newest character
-
-    if (newestIndex > 0) {
-      colors[newestIndex] = getRandomColor(); // Set the color of the newest character
-    } else {
-      colors[colors.length - 1] = normColor; // Set the color of the last character to normal color
-    }
-
-    return text.split('').map((char, index) => (
-      <span key={index} style={{ color: colors[index] }}>
-        {char}
-      </span>
-    ));
-  };
-
-  const getRandomColor = () => {
-    // Generate a random hex color code
-    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-  };
-
   const handleSequenceEnd = () => {
     // This callback is called when the entire sequence has been typed
     setShowCursor(false); // Hide the cursor
   };
+
 
   return (
     <div className="app">
@@ -67,46 +49,68 @@ const App = () => {
         </button>
         <button
           className={selectedOption === 'option4' ? 'active' : ''}
-          onClick={() => handleOptionChange('option4')}
+          onClick={() => {
+            window.open("https://drive.google.com/file/d/1gzJc51OMZU3lLveiLejSCytPOz5Xd_eH/view", "_blank");
+          }}
         >
           Resume
         </button>
+
+        
       </div>
 
-      {/* <div className="top-element"> */}
-        {/* <h1>Adam Gorka</h1> */}
-        {/* Add any other content for the top element */}
-      {/* </div> */}
-
       {/* Content */}
-      <div className="content">
+      <div className="page">
         {selectedOption === 'option1' && (
           <>
-            {/* <p>{text}</p> */}
-            {/* <TypedText delay={110}>Your typed text goes here</TypedText> */}
-            <TypeAnimation
-              sequence={[
-                "Hi, I'm Adam Gorka",
-                10000, // wait 1s before replacing "Mice" with "Hamsters"
-                "Hi, I'm a Junior studying CS at Penn",
-                10000,
-                "Hi, I'm excited to meet you!",
-                10000,
-                "Hi, I'm excited about all things CS!"
-              ]}
-              wrapper="span"
-              speed={50}
-              infinite={true}
-              style={{ fontSize: '4em', display: 'inline-block', color: '#614A42', font: 'lato', fontWeight: 'bold'}}
-              cursor={showCursor} // Only show the cursor when showCursor is true
-              onSequenceEnd={handleSequenceEnd} // Callback when the sequence ends
-            />
-            
+            <div className="type-bar">
+              <TypeAnimation
+                sequence={[
+                  "Hi, I'm Adam Gorka",
+                  5000, // wait 1s before replacing "Mice" with "Hamsters"
+                  "Hi, I'm a Junior studying CS at Penn",
+                  5000,
+                  "Hi, I'm excited to meet you!",
+                  10000,
+                  "Hi, I'm excited about all things CS!"
+                ]}
+                wrapper="span"
+                speed={50}
+                infinite={true}
+                style={{
+                  fontSize: '4em',
+                  display: 'inline-block',
+                  color: '#614A42',
+                  font: 'lato',
+                  fontWeight: 'bolder'
+                }}
+                cursor={showCursor} // Only show the cursor when showCursor is true
+                onSequenceEnd={handleSequenceEnd} // Callback when the sequence ends
+              />
+            </div>
+            <div className="content">
+              <FadeIn>
+                <About />
+              </FadeIn>
+            </div>
           </>
         )}
         {selectedOption === 'option2' && <p>Option 2 content goes here</p>}
         {selectedOption === 'option3' && <p>Option 3 content goes here</p>}
         {selectedOption === 'option4' && <p>Option 4 content goes here</p>}
+      </div>
+
+      {/* Social Media Icons */}
+      <div className="social-media">
+        <a href="https://www.linkedin.com/in/adam1gorka/" target="_blank" rel="noopener noreferrer">
+          <img src={linkedinIcon} alt="LinkedIn" className="social-icon" />
+        </a>
+        <a href="https://github.com/AdamEGorka" target="_blank" rel="noopener noreferrer">
+          <img src={githubIcon} alt="GitHub" className="social-icon" />
+        </a>
+        <a href="mailto:agorka@seas.upenn.edu">
+          <img src={gmailIcon} alt="Gmail" className="social-icon" />
+        </a>
       </div>
     </div>
   );
