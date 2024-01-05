@@ -51,7 +51,7 @@ const App = () => {
         <button
           className={selectedOption === 'option4' ? 'active' : ''}
           onClick={() => {
-            window.open("https://drive.google.com/file/d/1gzJc51OMZU3lLveiLejSCytPOz5Xd_eH/view", "_blank");
+            window.open("https://drive.google.com/file/d/1I2Qh-Eqt-FT4ia2iM8EoFU2XJxekC978/view?usp=sharing", "_blank");
           }}
         >
           Resume

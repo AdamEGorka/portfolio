@@ -1,8 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+// Change the tab name
+document.title = "Adam's Portfolio";
+
+// Change the tab icon
+// const favicon = document.getElementById('favicon');
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
