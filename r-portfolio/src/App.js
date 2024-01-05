@@ -2,7 +2,8 @@ import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import FadeIn from 'react-fade-in';
-
+import Projects from './Projects';
+import Teaching from './Teaching';
 // tabs
 import About from './About';
 
@@ -95,8 +96,20 @@ const App = () => {
             </div>
           </>
         )}
-        {selectedOption === 'option2' && <p>Option 2 content goes here</p>}
-        {selectedOption === 'option3' && <p>Option 3 content goes here</p>}
+        {selectedOption === 'option2' && (
+          <div className="content">
+            <FadeIn>
+              <Projects />
+            </FadeIn>
+          </div>
+        )}
+        {selectedOption === 'option3' && (
+          <div className="content">
+            <FadeIn>
+              <Teaching />
+            </FadeIn>
+          </div>
+        )}
         {selectedOption === 'option4' && <p>Option 4 content goes here</p>}
       </div>
 
